@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | RescueBuddy</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d78a26;
+      --primary-dark: #b5721f;
+      --primary-light: #f0a754;
+      --secondary: #ff6b6b;
+      --light: #fff8f0;
+      --dark: #333;
+      --gray: #6c757d;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    /* ========== ENHANCED NAVBAR ========== */
+      .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0.8rem 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030;
+    }
+    
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      background: rgba(215, 138, 38, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    }
+    
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-brand img {
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    
+    .navbar-brand:hover img {
+      transform: scale(1.05);
+    }
+    
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      margin: 0 8px;
+      padding: 10px 18px !important;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      color: white !important;
+      font-size: 1.05rem;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .nav-link.active {
+      background-color: rgba(255,255,255,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 50%;
+      background-color: white;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .nav-link:hover::after {
+      width: 70%;
+    }
+    
+    .nav-link.active::after {
+      width: 70%;
+    }
+    
+    /* Enhanced Dropdown Menu */
+    .dropdown-menu {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      padding: 12px;
+      margin-top: 12px;
+      background: white;
+      animation: dropdownFade 0.3s ease;
+    }
+    
+    @keyframes dropdownFade {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .dropdown-item {
+      border-radius: 10px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    
+    .dropdown-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .dropdown-item i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      transform: translateX(5px);
+    }
+    
+    .dropdown-item:hover i {
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .dropdown-toggle::after {
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+    
+    /* Enhanced Toggler Button */
+    .navbar-toggler {
+      border: none;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-toggler:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      transition: all 0.3s ease;
+    }
+    
+    /* Floating Animation for Logo */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, -8px); }
+      100% { transform: translate(0, 0px); }
+    }
+    
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        margin-top: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      }
+      
+      .nav-link {
+        color: var(--dark) !important;
+        margin: 5px 0;
+        text-align: center;
+      }
+      
+      .nav-link:hover {
+        background-color: rgba(215, 138, 38, 0.1);
+      }
+      
+      .nav-link.active {
+        background-color: rgba(215, 138, 38, 0.2);
+      }
+      
+      .nav-link::after {
+        display: none;
+      }
+      
+      .dropdown-menu {
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-top: 8px;
+      }
+    }
+    /* ========== PAGE HERO ========== */
+    .page-hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 150px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(215, 138, 38, 0.2), rgba(255, 107, 107, 0.2));
+      z-index: 1;
+    }
+    
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .page-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    .page-subtitle {
+      font-size: 1.5rem;
+      animation: fadeInUp 1s ease 0.3s both;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+    
+    /* ========== ABOUT CONTENT ========== */
+    .about-content {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: -10px;
+      left: 0;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+    
+    .section-title.center::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title:hover::after {
+      width: 120px;
+    }
+    
+    .intro-text {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: var(--dark);
+    }
+    
+    .mission-box {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin: 40px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mission-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1517423738875-5ce310acd3da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .mission-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .mission-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .mission-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-style: italic;
+    }
+    
+    .values-section {
+      margin: 60px 0;
+    }
+    
+    .value-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      height: 100%;
+      border-top: 4px solid var(--primary);
+    }
+    
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .value-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .value-card:hover .value-icon {
+      transform: scale(1.2) rotate(5deg);
+      color: var(--primary-dark);
+    }
+    
+    .value-title {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .team-section {
+      margin: 60px 0;
+    }
+    
+    .team-member {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .team-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      border: 4px solid var(--primary);
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    
+    .team-member:hover .team-img {
+      transform: scale(1.05);
+      border-color: var(--primary-dark);
+    }
+    
+    .team-name {
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .team-role {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    .team-bio {
+      color: var(--gray);
+    }
+    
+    .join-section {
+      background: linear-gradient(135deg, var(--light) 0%, #f9e9d5 100%);
+      padding: 60px 0;
+      border-radius: 16px;
+      margin: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .join-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      opacity: 0.05;
+      z-index: 1;
+    }
+    
+    .join-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .join-text {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+    }
+    
+    .join-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      padding: 14px 35px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 8px 20px rgba(215, 138, 38, 0.3);
+      color: white;
+    }
+    
+    .join-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: all 0.6s;
+      z-index: -1;
+    }
+    
+    .join-btn:hover::before {
+      left: 100%;
+    }
+    
+    .join-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(215, 138, 38, 0.4);
+      color: white;
+    }
+    
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* ========== ENHANCED FOOTER ========== */
+    .footer {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 60px 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-dark), var(--secondary), var(--primary-dark));
+    }
+    
+    .footer::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: url('https://images.unsplash.com/photo-1554456854-55a089fd4cb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80');
+      background-size: cover;
+      opacity: 0.05;
+      border-radius: 50%;
+      transform: translate(30%, 30%);
+    }
+    
+    .footer h5 {
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+      font-weight: 700;
+    }
+    
+    .footer h5::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: white;
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    
+    .footer h5:hover::after {
+      width: 80px;
+    }
+    
+    .footer-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+      margin-bottom: 10px;
+      padding: 5px 0;
+      border-bottom: 1px solid transparent;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-left: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .footer-contact p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-contact p:hover {
+      transform: translateX(5px);
+    }
+    
+    .footer-contact i {
+      width: 20px;
+      margin-right: 10px;
+      color: var(--primary-light);
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 42px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .social-icons a:hover {
+      background-color: white;
+      color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      margin-top: 40px;
+    }
+    
+    .footer-logo {
+      max-height: 50px;
+      filter: brightness(-1) invert(1);
+      margin-bottom: 15px;
+    }
+    
+    /* ========== RESPONSIVE ADJUSTMENTS ========== */
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2.5rem;
+      }
+      
+      .page-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .mission-text {
+        font-size: 1.3rem;
+      }
+      
+      .footer::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== ENHANCED NAVBAR ========== -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="./img/logo.png" height="65" alt="RescueBuddy" class="floating">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+              Our Services
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="adoption.html">
+                <i class="fas fa-paw"></i>Adoption
+              </a></li>
+              <li><a class="dropdown-item" href="care.html">
+                <i class="fas fa-heart"></i>Care Services
+              </a></li>
+              <li><a class="dropdown-item" href="vol.html">
+                <i class="fas fa-hands-helping"></i>Volunteering
+              </a></li>
+              <li><a class="dropdown-item" href="service.html">
+                <i class="fas fa-concierge-bell"></i>All Services
+              </a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <h1 class="page-title">About RescueBuddy</h1>
+      <p class="page-subtitle">Learn more about our mission, story, and the team behind our work</p>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT CONTENT ========== -->
+  <div class="about-content">
+    <div class="container">
+      <!-- Introduction -->
+      <div class="row mb-5">
+        <div class="col-lg-10 mx-auto fade-in">
+          <p class="intro-text">
+            At <strong>RescueBuddy</strong>, we believe every dog deserves a loving home and every human deserves a loyal companion.
+          </p>
+        </div>
+      </div>
+
+      <!-- Our Story -->
+      <div class="row mb-5">
+        <div class="col-lg-10 mx-auto fade-in">
+          <h2 class="section-title">Our Story</h2>
+          <p>
+            Founded with a passion for animal welfare, RescueBuddy is more than just a dog adoption platform — it's a community of pet lovers, rescuers, and volunteers working together to give homeless and abandoned dogs a second chance at life.
+          </p>
+          <p>
+            Our journey began in 2015 when our founder, Sarah Johnson, rescued a stray Labrador mix from a busy highway. That experience opened her eyes to the countless dogs in need of help and loving homes. What started as a small initiative to help local shelters has grown into a comprehensive platform connecting thousands of dogs with their forever families.
+          </p>
+        </div>
+      </div>
+
+      <!-- Mission Box -->
+      <div class="row">
+        <div class="col-lg-10 mx-auto fade-in">
+          <div class="mission-box">
+            <div class="mission-content">
+              <div class="mission-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h2 class="section-title center text-white">Our Mission</h2>
+              <p class="mission-text">To connect rescue dogs with compassionate humans, creating lifelong friendships.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What We Do -->
+      <div class="row mb-5">
+        <div class="col-lg-10 mx-auto fade-in">
+          <h2 class="section-title">What We Do</h2>
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+              <div class="value-card">
+                <div class="value-icon">
+                  <i class="fas fa-handshake"></i>
+                </div>
+                <h4 class="value-title">Partner with Trusted Shelters</h4>
+                <p>We collaborate with reputable rescue organizations and shelters to increase the visibility of adoptable dogs.</p>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="value-card">
+                <div class="value-icon">
+                  <i class="fas fa-dog"></i>
+                </div>
+                <h4 class="value-title">Showcase Adoptable Dogs</h4>
+                <p>We create detailed, heartfelt profiles to help potential adopters find their perfect match based on lifestyle and needs.</p>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="value-card">
+                <div class="value-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h4 class="value-title">Promote Responsible Ownership</h4>
+                <p>We provide education and support to ensure successful adoptions and lifelong pet relationships.</p>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="value-card">
+                <div class="value-icon">
+                  <i class="fas fa-home"></i>
+                </div>
+                <h4 class="value-title">Support Foster Programs</h4>
+                <p>We facilitate temporary homes for dogs awaiting their forever families through our foster network.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Values -->
+      <div class="values-section">
+        <div class="row">
+          <div class="col-lg-10 mx-auto fade-in">
+            <h2 class="section-title text-center center">Our Values</h2>
+            <div class="row mt-4">
+              <div class="col-md-4 mb-4">
+                <div class="value-card">
+                  <div class="value-icon">
+                    <i class="fas fa-heart"></i>
+                  </div>
+                  <h4 class="value-title">Compassion</h4>
+                  <p>We approach every animal and person with empathy, understanding, and kindness.</p>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <div class="value-card">
+                  <div class="value-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <h4 class="value-title">Responsibility</h4>
+                  <p>We take our duty to animals seriously, ensuring their wellbeing is always our priority.</p>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <div class="value-card">
+                  <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                  </div>
+                  <h4 class="value-title">Collaboration</h4>
+                  <p>We work together with shelters, volunteers, and communities to maximize our impact.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Team -->
+      <div class="team-section">
+        <div class="row">
+          <div class="col-lg-10 mx-auto fade-in">
+            <h2 class="section-title text-center center">Our Team</h2>
+            <p class="text-center mb-5">Our dedicated team consists of animal welfare experts, veterinarians, trainers, and passionate volunteers who work tirelessly to ensure every dog receives the care and love they deserve.</p>
+            <div class="row">
+              <div class="col-md-4 team-member fade-in">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="team-img">
+                <h4 class="team-name">Sarah Johnson</h4>
+                <p class="team-role">Founder & Director</p>
+                <p class="team-bio">Sarah founded RescueBuddy after rescuing her first dog from a busy highway. Her passion for animal welfare drives our mission.</p>
+              </div>
+              <div class="col-md-4 team-member fade-in">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="team-img">
+                <h4 class="team-name">Michael Chen</h4>
+                <p class="team-role">Veterinary Advisor</p>
+                <p class="team-bio">With over 15 years of veterinary experience, Michael ensures all our rescue dogs receive proper medical care and attention.</p>
+              </div>
+              <div class="col-md-4 team-member fade-in">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jessica Martinez" class="team-img">
+                <h4 class="team-name">Jessica Martinez</h4>
+                <p class="team-role">Adoption Coordinator</p>
+                <p class="team-bio">Jessica matches dogs with their perfect families, ensuring successful adoptions and lifelong companionship.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Join the Journey -->
+      <div class="join-section">
+        <div class="container join-content">
+          <div class="row">
+            <div class="col-lg-8 mx-auto fade-in">
+              <h2 class="section-title text-center center">Join the Journey</h2>
+              <p class="join-text">
+                Whether you're looking to adopt, foster, volunteer, or simply spread the word, RescueBuddy welcomes you to be part of a meaningful journey — because every wagging tail deserves a happy ending.
+              </p>
+              <p class="mb-4"><strong>Join us. Rescue a dog. Find your buddy.</strong></p>
+              <a href="contact.html" class="btn join-btn">Get Involved Today</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ENHANCED FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="./img/logo.png" alt="RescueBuddy" class="footer-logo" height="70">
+          <p>RescueBuddy connects rescue dogs with compassionate humans, creating lifelong friendships. We're a community of pet lovers working to give homeless dogs a second chance at life.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <h5>Quick Links</h5>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="adoption.html">Adoption</a>
+            <a href="care.html">Care Services</a>
+            <a href="vol.html">Volunteer</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5>Contact Info</h5>
+          <div class="footer-contact">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Rescue Street, Pet City</p>
+            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            <p><i class="fas fa-envelope"></i> contact@rescuebuddy.org</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Adoption Hours</h5>
+          <div class="footer-links">
+            <p>Monday - Friday: 9am - 6pm</p>
+            <p>Saturday: 10am - 4pm</p>
+            <p>Sunday: 12pm - 4pm</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2025 RescueBuddy. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <a href="#" class="text-white me-3">Privacy Policy</a>
+            <a href="#" class="text-white">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Fade in animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', fadeInOnScroll);
+    // Initial check in case elements are already in view
+    fadeInOnScroll();
+  </script>
+</body>
+</html>

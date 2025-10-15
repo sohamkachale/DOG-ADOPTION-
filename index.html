@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RescueBuddy | Professional Dog Adoption Platform</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d78a26;
+      --primary-dark: #b5721f;
+      --primary-light: #f0a754;
+      --secondary: #ff6b6b;
+      --light: #fff8f0;
+      --dark: #333;
+      --gray: #6c757d;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    /* ========== ENHANCED NAVBAR ========== */
+      .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0.8rem 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030;
+    }
+    
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      background: rgba(215, 138, 38, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    }
+    
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-brand img {
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    
+    .navbar-brand:hover img {
+      transform: scale(1.05);
+    }
+    
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      margin: 0 8px;
+      padding: 10px 18px !important;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      color: white !important;
+      font-size: 1.05rem;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .nav-link.active {
+      background-color: rgba(255,255,255,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 50%;
+      background-color: white;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .nav-link:hover::after {
+      width: 70%;
+    }
+    
+    .nav-link.active::after {
+      width: 70%;
+    }
+    
+    /* Enhanced Dropdown Menu */
+    .dropdown-menu {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      padding: 12px;
+      margin-top: 12px;
+      background: white;
+      animation: dropdownFade 0.3s ease;
+    }
+    
+    @keyframes dropdownFade {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .dropdown-item {
+      border-radius: 10px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    
+    .dropdown-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .dropdown-item i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      transform: translateX(5px);
+    }
+    
+    .dropdown-item:hover i {
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .dropdown-toggle::after {
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+    
+    /* Enhanced Toggler Button */
+    .navbar-toggler {
+      border: none;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-toggler:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      transition: all 0.3s ease;
+    }
+    
+    /* Floating Animation for Logo */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, -8px); }
+      100% { transform: translate(0, 0px); }
+    }
+    
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        margin-top: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      }
+      
+      .nav-link {
+        color: var(--dark) !important;
+        margin: 5px 0;
+        text-align: center;
+      }
+      
+      .nav-link:hover {
+        background-color: rgba(215, 138, 38, 0.1);
+      }
+      
+      .nav-link.active {
+        background-color: rgba(215, 138, 38, 0.2);
+      }
+      
+      .nav-link::after {
+        display: none;
+      }
+      
+      .dropdown-menu {
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-top: 8px;
+      }
+    }
+    /* ========== HERO SECTION ========== */
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      padding: 180px 0 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(215, 138, 38, 0.2), rgba(255, 107, 107, 0.2));
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 1s ease;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 1s ease 0.3s both;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+    
+    .btn-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      padding: 14px 35px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      animation: fadeInUp 1s ease 0.6s both;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 8px 20px rgba(215, 138, 38, 0.3);
+    }
+    
+    .btn-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: all 0.6s;
+      z-index: -1;
+    }
+    
+    .btn-hero:hover::before {
+      left: 100%;
+    }
+    
+    .btn-hero:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(215, 138, 38, 0.4);
+    }
+    
+    /* ========== SECTION STYLING ========== */
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: -10px;
+      left: 0;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+    
+    .section-title.center::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title:hover::after {
+      width: 120px;
+    }
+    
+    /* ========== CARD ANIMATIONS ========== */
+    .service-card, .dog-card {
+      border: none;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      margin-bottom: 30px;
+    }
+    
+    .service-card:hover, .dog-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .service-icon {
+      font-size: 3.2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.2) rotate(5deg);
+      color: var(--primary-dark);
+    }
+    
+    /* ========== ADOPTION CARDS ========== */
+    .dog-card img {
+      transition: transform 0.5s ease;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .dog-card:hover img {
+      transform: scale(1.08);
+    }
+    
+    .adopt-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(215, 138, 38, 0.2);
+    }
+    
+    .adopt-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: all 0.6s;
+    }
+    
+    .adopt-btn:hover::before {
+      left: 100%;
+    }
+    
+    .adopt-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(215, 138, 38, 0.3);
+    }
+    
+    /* ========== TESTIMONIAL CAROUSEL ========== */
+    .testimonial-item {
+      padding: 35px;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin: 0 15px;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .testimonial-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    
+    .testimonial-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid var(--primary);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .testimonial-item:hover .testimonial-img {
+      transform: scale(1.1);
+      border-color: var(--primary-dark);
+    }
+    
+    .carousel-control-prev, .carousel-control-next {
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+    
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .carousel-control-prev {
+      left: -25px;
+    }
+    
+    .carousel-control-next {
+      right: -25px;
+    }
+    
+    /* ========== ENHANCED FOOTER ========== */
+    .footer {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 60px 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-dark), var(--secondary), var(--primary-dark));
+    }
+    
+    .footer::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      /* background: url('https://images.unsplash.com/photo-1554456854-55a089fd4cb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'); */
+      background-size: cover;
+      opacity: 0.05;
+      border-radius: 50%;
+      transform: translate(30%, 30%);
+    }
+    
+    .footer h5 {
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+      font-weight: 700;
+    }
+    
+    .footer h5::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: white;
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    
+    .footer h5:hover::after {
+      width: 80px;
+    }
+    
+    .footer-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+      margin-bottom: 10px;
+      padding: 5px 0;
+      border-bottom: 1px solid transparent;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-left: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .footer-contact p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-contact p:hover {
+      transform: translateX(5px);
+    }
+    
+    .footer-contact i {
+      width: 20px;
+      margin-right: 10px;
+      color: var(--primary-light);
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 42px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .social-icons a:hover {
+      background-color: white;
+      color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      margin-top: 40px;
+    }
+    
+    .footer-logo {
+      max-height: 70px;
+      filter: brightness(-1) invert(1);
+      margin-bottom: 15px;
+    }
+    
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* ========== STATS SECTION ========== */
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1517423738875-5ce310acd3da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .stats-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    .stat-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* ========== NEWSLETTER ========== */
+    .newsletter {
+      background: linear-gradient(135deg, var(--dark) 0%, #444 100%);
+      color: white;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .newsletter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1554456854-55a089fd4cb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .newsletter-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .newsletter-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .form-control {
+      border-radius: 50px 0 0 50px;
+      border: none;
+      padding: 14px 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(215, 138, 38, 0.25);
+    }
+    
+    .newsletter-btn {
+      border-radius: 0 50px 50px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      padding: 14px 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .newsletter-btn:hover {
+      transform: translateX(5px);
+    }
+    
+    /* ========== FLOATING ELEMENTS ========== */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, -15px); }
+      100% { transform: translate(0, 0px); }
+    }
+    
+    /* ========== RESPONSIVE ADJUSTMENTS ========== */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .hero-section {
+        background-attachment: scroll;
+        padding: 150px 0 100px;
+      }
+      
+      .carousel-control-prev, .carousel-control-next {
+        display: none;
+      }
+      
+      .footer::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== ENHANCED NAVBAR ========== -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="./img/logo.png" height="65" alt="RescueBuddy" class="floating">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+              Our Services
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="adoption.html">
+                <i class="fas fa-paw"></i>Adoption
+              </a></li>
+              <li><a class="dropdown-item" href="care.html">
+                <i class="fas fa-heart"></i>Care Services
+              </a></li>
+              <li><a class="dropdown-item" href="vol.html">
+                <i class="fas fa-hands-helping"></i>Volunteering
+              </a></li>
+              <li><a class="dropdown-item" href="service.html">
+                <i class="fas fa-concierge-bell"></i>All Services
+              </a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <h1 class="hero-title">Find Your Furry Best Friend</h1>
+      <p class="hero-subtitle">RescueBuddy connects loving homes with rescue dogs in need of a second chance</p>
+      <a href="adoption.html" class="btn btn-hero">Meet Our Dogs</a>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0 fade-in">
+          <h2 class="section-title">About RescueBuddy</h2>
+          <p class="lead">We believe every dog deserves a loving home and every human deserves a loyal companion.</p>
+          <p>Founded with a passion for animal welfare, RescueBuddy is more than just a dog adoption platform — it's a community of pet lovers, rescuers, and volunteers working together to give homeless and abandoned dogs a second chance at life.</p>
+          <a href="about.html" class="btn btn-primary mt-3">Learn More About Us</a>
+        </div>
+        <div class="col-lg-6 fade-in">
+          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Happy dog" class="img-fluid rounded shadow floating">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES SECTION ========== -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title text-center center mb-5">Our Services</h2>
+      <div class="row">
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card service-card h-100 text-center p-4">
+            <div class="service-icon">
+              <i class="fas fa-paw"></i>
+            </div>
+            <h4>Dog Adoption</h4>
+            <p>Find your perfect furry companion from our carefully selected rescue dogs.</p>
+            <a href="adoption.html" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card service-card h-100 text-center p-4">
+            <div class="service-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h4>Care Services</h4>
+            <p>Get guidance on nutrition, training, and healthcare for your rescue dog.</p>
+            <a href="care.html" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card service-card h-100 text-center p-4">
+            <div class="service-icon">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h4>Volunteering</h4>
+            <p>Join our community of volunteers and make a difference in a dog's life.</p>
+            <a href="vol.html" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card service-card h-100 text-center p-4">
+            <div class="service-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <h4>Foster Program</h4>
+            <p>Provide temporary homes for dogs awaiting their forever families.</p>
+            <a href="service.html" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS SECTION ========== -->
+  <section class="stats-section">
+    <div class="container stats-content">
+      <div class="row text-center">
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number" data-count="1250">0</div>
+            <div class="stat-text">Dogs Rescued</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number" data-count="980">0</div>
+            <div class="stat-text">Happy Adoptions</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number" data-count="150">0</div>
+            <div class="stat-text">Active Volunteers</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-item">
+            <div class="stat-number" data-count="25">0</div>
+            <div class="stat-text">Partner Shelters</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED DOGS ========== -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="section-title text-center center mb-5">Featured Dogs</h2>
+      <div class="row">
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card dog-card">
+            <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blizzard">
+            <div class="card-body">
+              <h5 class="card-title">Blizzard</h5>
+              <p class="card-text">Playful Siberian Husky with icy-blue eyes. Full of energy and ready for adventures!</p>
+              <a href="contact.html" class="btn adopt-btn">Adopt Me</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card dog-card">
+            <img src="https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Leo">
+            <div class="card-body">
+              <h5 class="card-title">Leo</h5>
+              <p class="card-text">Smart and alert Indian Pariah Dog. Loyal companion looking for his forever home.</p>
+              <a href="contact.html" class="btn adopt-btn">Adopt Me</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card dog-card">
+            <img src="https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Coco">
+            <div class="card-body">
+              <h5 class="card-title">Coco</h5>
+              <p class="card-text">Friendly Labrador full of love and potential. Great with kids and other pets.</p>
+              <a href="contact.html" class="btn adopt-btn">Adopt Me</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="card dog-card">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Bailey">
+            <div class="card-body">
+              <h5 class="card-title">Bailey</h5>
+              <p class="card-text">Calm and loving Golden Retriever. Well-behaved and wonderful with families.</p>
+              <a href="contact.html" class="btn adopt-btn">Adopt Me</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="adoption.html" class="btn btn-outline-primary btn-lg pulse">View All Dogs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title text-center center mb-5">Happy Tails</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="testimonial-item text-center">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sam" class="testimonial-img">
+              <h5>Sam</h5>
+              <p class="text-muted">Adopted Blizzard</p>
+              <p>"I can't thank RescueBuddy enough for bringing this incredible companion into my life. The process was smooth, and the staff was incredibly supportive. Every day is filled with wagging tails and warm cuddles!"</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="testimonial-item text-center">
+              <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Jack" class="testimonial-img">
+              <h5>Jack</h5>
+              <p class="text-muted">Adopted Leo</p>
+              <p>"From the moment we met at the adoption event, I knew he was the one. Watching my son and our new pup bond instantly brought tears to my eyes. Thank you, RescueBuddy, for making adoption simple and meaningful."</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="testimonial-item text-center">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sena" class="testimonial-img">
+              <h5>Sena</h5>
+              <p class="text-muted">Adopted Coco</p>
+              <p>"The moment I held this little pup in my arms, I knew my life had changed forever. RescueBuddy made it so easy to find my perfect match. I can't believe how much joy he's brought into my life already!"</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEWSLETTER ========== -->
+  <section class="newsletter">
+    <div class="container newsletter-content">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h3 class="mb-3">Stay Updated</h3>
+          <p class="mb-4">Subscribe to our newsletter to receive updates on new dogs available for adoption, events, and volunteer opportunities.</p>
+          <form class="newsletter-form">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Your email address" required>
+              <button class="btn newsletter-btn" type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ENHANCED FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img src="./img/logo.png" alt="RescueBuddy"  class="footer-logo" height="70">
+          <p>RescueBuddy connects rescue dogs with compassionate humans, creating lifelong friendships. We're a community of pet lovers working to give homeless dogs a second chance at life.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <h5>Quick Links</h5>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="adoption.html">Adoption</a>
+            <a href="care.html">Care Services</a>
+            <a href="vol.html">Volunteer</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5>Contact Info</h5>
+          <div class="footer-contact">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Rescue Street, Pet City</p>
+            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            <p><i class="fas fa-envelope"></i> contact@rescuebuddy.org</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5>Adoption Hours</h5>
+          <div class="footer-links">
+            <p>Monday - Friday: 9am - 6pm</p>
+            <p>Saturday: 10am - 4pm</p>
+            <p>Sunday: 12pm - 4pm</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2025 RescueBuddy. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <a href="#" class="text-white me-3">Privacy Policy</a>
+            <a href="#" class="text-white">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Fade in animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', fadeInOnScroll);
+    // Initial check in case elements are already in view
+    fadeInOnScroll();
+
+    // Counter animation for stats
+    const counters = document.querySelectorAll('.stat-number');
+    const speed = 200;
+    
+    const animateCounters = function() {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const count = +counter.innerText;
+        const increment = target / speed;
+        
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(animateCounters, 1);
+        } else {
+          counter.innerText = target;
+        }
+      });
+    };
+    
+    // Start counter animation when stats section is in view
+    const statsSection = document.querySelector('.stats-section');
+    
+    const startCounterOnScroll = function() {
+      const sectionTop = statsSection.getBoundingClientRect().top;
+      if (sectionTop < window.innerHeight - 100) {
+        animateCounters();
+        window.removeEventListener('scroll', startCounterOnScroll);
+      }
+    };
+    
+    window.addEventListener('scroll', startCounterOnScroll);
+    // Initial check in case stats section is already in view
+    startCounterOnScroll();
+  </script>
+</body>
+</html>
